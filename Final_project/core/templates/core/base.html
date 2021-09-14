@@ -41,20 +41,182 @@
 
 
 </head>
+  <body>
+  <!-- Start header section -->
+  <header id="aa-header">
+    <!-- start header top  -->
+    <div class="aa-header-top">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="aa-header-top-area">
+              <!-- start header top left -->
+              <div class="aa-header-top-left">
+                <!-- start language -->
+                <div class="aa-language">
+                  <div class="dropdown">
+                    <a class="btn dropdown-toggle" href="#" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                      <img src="img/flag/english.jpg' %}" alt="english flag">ENGLISH
+                      <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                      <li><a href="#"><img src="img/flag/french.jpg' %}" alt="">FRENCH</a></li>
+                      <li><a href="#"><img src="img/flag/english.jpg' %}" alt="">ENGLISH</a></li>
+                    </ul>
+                  </div>
+                </div>
+                <!-- / language -->
 
+                <!-- start currency -->
+                <div class="aa-currency">
+                  <div class="dropdown">
+                    <a class="btn dropdown-toggle" href="#" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                      <i class="fa fa-usd"></i>USD
+                      <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                      <li><a href="#"><i class="fa fa-euro"></i>EURO</a></li>
+                      <li><a href="#"><i class="fa fa-jpy"></i>YEN</a></li>
+                    </ul>
+                  </div>
+                </div>
+                <!-- / currency -->
+                <!-- start cellphone -->
+                <div class="cellphone hidden-xs">
+                  <p><span class="fa fa-phone"></span>00-62-658-658</p>
+                </div>
+                <!-- / cellphone -->
+              </div>
+              <!-- / header top left -->
+              <div class="aa-header-top-right">
+                <ul class="aa-head-top-nav-right">
+                  <li><a href="account.html">My Account</a></li>
+                  <li class="hidden-xs"><a href="wishlist.html">Wishlist</a></li>
+                  <li class="hidden-xs"><a href="cart.html">My Cart</a></li>
+                  <li class="hidden-xs"><a href="checkout.html">Checkout</a></li>
+                  <li><a href="" data-toggle="modal" data-target="#login-modal">Login</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- / header top  -->
+
+    <!-- start header bottom  -->
+    <div class="aa-header-bottom">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="aa-header-bottom-area">
+              <!-- logo  -->
+              <div class="aa-logo">
+                <!-- Text based logo -->
+                <a href="{% url 'home' %}">
+                  <span class="fa fa-shopping-cart"></span>
+                  <p>Остендорф<strong></strong> <span></span></p>
+                </a>
+                <!-- img based logo -->
+                <!-- <a href="index.html"><img src="img/logo.jpg' %}" alt="logo img"></a> -->
+              </div>
+              <!-- / logo  -->
+               <!-- cart box -->
+              <div class="aa-cartbox">
+                <a class="aa-cart-link" href="{% url 'cart' %}">
+                  <span class="fa fa-shopping-basket"></span>
+                  <span class="aa-cart-title">Корзина</span>
+                  <span class="aa-cart-notify">{{order_count}}</span>
+                </a>
+                <div class="aa-cartbox-summary">
+                  <ul>
+                    {% for order_item in order %}
+                    <li>
+                      <div class="aa-cartbox-info">
+                        <a class="aa-cartbox-img" href="#"><img src="{{ order_item.product.image.url }}" alt="img"></a>
+                        <h4><a href="{% url 'product-detail' order_item.product.id %}">{{order_item.product.name}}</a></h4>
+                        <p>{{order_item.quantity}} x {{order_item.product.price}}</p>
+                      </div>
+                      <a class="aa-remove-product" href="#"><span class="fa fa-times"></span></a>
+                    </li>
+                    {% endfor %}
+                    <li>
+                      <span class="aa-cartbox-total-title">
+                        Total
+                      </span>
+                      <span class="aa-cartbox-total-price">
+                        1
+                      </span>
+                    </li>
+
+                  </ul>
+                  <a class="aa-cartbox-checkout aa-primary-btn" href="checkout.html">Checkout</a>
+                </div>
+              </div>
+              <!-- / cart box -->
+              <!-- search box -->
+              <div class="aa-search-box">
+                <form action="">
+                  <input type="text" name="" id="" >
+                  <button type="submit"><span class="fa fa-search"></span></button>
+                </form>
+              </div>
+              <!-- / search box -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- / header bottom  -->
+  </header>
+  <!-- / header section -->
+  <!-- menu -->
+  <section id="menu">
+    <div class="container">
+      <div class="menu-area">
+        <!-- Navbar -->
+        <div class="navbar navbar-default" role="navigation">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+          <div class="navbar-collapse collapse">
+            <!-- Left nav -->
+            <ul class="nav navbar-nav">
+              <li><a href="{% url 'home' %}">Главная</a></li>
+              <li><a href="#"> Категории <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  {% for cat in category %}
+                  <li><a href="#">{{ cat.name }}</a></li>
+                  {% endfor %}
+                </ul>
+              <li><a href="{% url 'home' %}"> О бренде </a></li>
+              <li><a href="{% url 'home' %}"> Подднржка </a></li>
+              <li><a href="{% url 'home' %}"> Контакты </a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- / menu -->
 {% block content%}
 {%endblock%}
   <!-- jQuery library -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
-  <script src="static/core/js/bootstrap.js"></script>  
+  <script src="static/core/js/bootstrap.js"></script>
   <!-- SmartMenus jQuery plugin -->
   <script type="text/javascript" src="static/core/js/jquery.smartmenus.js"></script>
   <!-- SmartMenus jQuery Bootstrap Addon -->
-  <script type="text/javascript" src="static/core/js/jquery.smartmenus.bootstrap.js"></script>  
+  <script type="text/javascript" src="static/core/js/jquery.smartmenus.bootstrap.js"></script>
   <!-- To Slider JS -->
   <script src="static/core/js/sequence.js"></script>
-  <script src="static/core/js/sequence-theme.modern-slide-in.js"></script>  
+  <script src="static/core/js/sequence-theme.modern-slide-in.js"></script>
   <!-- Product view slider -->
   <script type="text/javascript" src="static/core/js/jquery.simpleGallery.js"></script>
   <script type="text/javascript" src="static/core/js/jquery.simpleLens.js"></script>
@@ -63,7 +225,7 @@
   <!-- Price picker slider -->
   <script type="text/javascript" src="static/core/js/nouislider.js"></script>
   <!-- Custom js -->
-  <script src="static/core/js/custom.js"></script> 
+  <script src="static/core/js/custom.js"></script>
   
 
   </body>
