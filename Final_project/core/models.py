@@ -2,6 +2,11 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
+def validate_num(value):
+    if value < 0:
+        value = 0
+
+
 class Category(models.Model):
     name = models.CharField(max_length=100)
     image = models.ImageField(blank=True, upload_to='media')
@@ -13,7 +18,7 @@ class Category(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
-    quantity = models.IntegerField()
+    quantity = models.IntegerField(validators=[validate_num])
     image = models.ImageField(blank=True, upload_to='media')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True)
     price = models.FloatField()

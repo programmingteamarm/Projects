@@ -1,8 +1,12 @@
 {% extends 'core/base.html' %}
 {%block content%}
-  <body>
-   
 
+<div class="col-md-6">
+                <div class="aa-myaccount-register">
+                 <h4>{{user.username}}</h4>
+                </div>
+</div>
+{% for order in orders %}
 
  <!-- Cart view section -->
  <section id="cart-view">
@@ -14,9 +18,10 @@
              <form action="">
                <div class="table-responsive">
                   <table class="table">
+                    <h4>{{order.created_at}}</h4>
                     <thead>
                       <tr>
-                        <th></th>
+
                         <th></th>
                         <th>Product</th>
                         <th>Price</th>
@@ -25,9 +30,10 @@
                       </tr>
                     </thead>
                     <tbody>
-                    {% for order_item in order %}
+                    {% for order_item in order.order_item.all %}
+
                       <tr>
-                        <td><a class="remove" href="{% url 'remove' order_item.id %}"><fa class="fa fa-close"></fa></a></td>
+
                         <td><a href="#"><img src="{{ order_item.product.image.url }}" alt="img"></a></td>
                         <td><a class="aa-cart-title" href="#">{{ order_item.product.name }}</a></td>
                         <td>{{order_item.product.price}}</td>
@@ -39,21 +45,8 @@
                   </table>
                 </div>
              </form>
-             <!-- Cart Total view -->
-             <div class="cart-view-total">
-               <h4>Cart Totals</h4>
-               <table class="aa-totals-table">
-                 <tbody>
 
-                   <tr>
-                     <th>Total</th>
-                     <td>{{order_price}}</td>
-                   </tr>
-                 </tbody>
-               </table>
-               {% if order_count %}
-               <a href="{% url 'buy' %}" class="aa-cart-view-btn">Оформить заказ</a>
-               {% endif %}
+
              </div>
            </div>
          </div>
@@ -62,6 +55,8 @@
    </div>
  </section>
  <!-- / Cart view section -->
+{% endfor %}
+
 
 
 {% endblock %}
